@@ -9,6 +9,46 @@ const port = process.env.PORT || 3000
 
 app.use(express.json())
 
+
+app.get('/users', (req, res) => {
+    User.find({}).then((users) => {
+        res.send(users)
+    }).catch((e) => {
+        res.status(500).send();
+    })
+})
+
+app.get('/users/:id', (req, res) => {
+    // console.log(req.params)
+    const _id = req.params.id
+
+    User.findById(_id).then((users) => {
+        if (!users)
+            return res.status(404).send()
+    }).catch((e) => {
+
+    })
+})
+app.get('/tasks', (req, res) => {
+    Task.find({}).then((tasks) => {
+        res.send(tasks)
+    }).catch((e) => {
+        res.status(500).send();
+    })
+})
+
+app.get('/tasks/:id', (req, res) => {
+    // console.log(req.params)
+    const _id = req.params.id
+
+    Task.findById(_id).then((tasks) => {
+        if (!tasks)
+            return res.status(404).send()
+    }).catch((e) => {
+
+    })
+})
+
 app.post('/users', (req, res) => {
     const user = new User(req.body)
 
