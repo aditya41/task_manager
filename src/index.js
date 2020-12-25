@@ -18,12 +18,11 @@ app.listen(port, () => {
     console.log('Server is up on port ' + port)
 })
 
-const jwt = require('jsonwebtoken')
-
-const myFunction = async() => {
-    const token = jwt.sign({ _id: 'abc' }, 'thisismynewcourse', { expiresIn: '7 days' })
-    console.log(token)
-    const data = jwt.verify(token, 'thisismynewcourse')
-    console.log(data)
+const pet = {
+    name: 'hal'
 }
-myFunction()
+pet.toJSON = function() {
+    console.log(this)
+    return this
+}
+console.log(JSON.stringify(pet))
